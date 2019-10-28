@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Snake game</title>
+</head>
+<body>
+    <canvas id="game-board" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.querySelector('#game-board');
+        const context = canvas.getContext('2d');
+
+        //intializing all variables needed for the game
+
+        //snake position
+        let snakeX = 15;
+        let snakeY = 15;
+
+        //size of the game
+        let grid = 20;
+        let tiles = 20;
+
+        //position of the food
+        let foodX = 10;
+        let foodY = 10;
+
+        //speed of the snake
+        let xVelocity = 1;
+        let yVelocity = 0;
+
+        //path of the snake
+        let trail = [];
+
+        //length of the tail
+        let tail = 5;
+
+        function runGame() {
+            snakeX += xVelocity;
+            snakeY += yVelocity;
+
+            if (snakeX < 0) {
+                snakeX = tiles - 1;
+            }
+            if (snakeX > tiles - 1) {
+                snakeX = 0;
+            }
+            if (snakeY < 0) {
+                snakeY = tiles - 1;
+            }
+            if (snakeY > tiles - 1) {
+                snakeY = 0;
+            }
+
+            trail.push({ x: snakeX, y: snakeY });
+
+            //trimming the trail when the snake has touched it's tail
+            while (trail.length > tail) {
+                trail.shift();
+            }
+
+            context.fillStyle = 'black';
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = '#4088ed';
+            for (let i = 0; i < trail.length; i++) {
+                context.fillRect(trail[i].x * grid, trail[i].y * grid, grid - 2, grid - 2);
+                
+                //check if snake touches it's tail
+                if (trail[i].x == snakeX && trail[i].y == snakeY) {
+                    tail = 5;
+                }
+            }
+
+            context.fillStyle = 'red';
+            context.fillRect(foodX * grid, foodY * grid, grid - 2, grid - 2);
+
+            //increase tail length when food is eaten
+            if (foodX == snakeX && foodY == snakeY) {
+                tail++;
+                foodX = Math.floor(Math.random() * tiles);
+                foodY = Math.floor(Math.random() * tiles);
+            }
+        }
+
+        function keyPushed(e) {
+            if (e.key == 'ArrowLeft') {
+                xVelocity = -1;
+                yVelocity = 0;
+            }
+            if (e.key == 'ArrowUp') {
+                xVelocity = 0;
+                yVelocity = -1;
+            }
+            if (e.key == 'ArrowRight') {
+                xVelocity = 1;
+                yVelocity = 0;
+            }
+            if (e.key == 'ArrowDown') {
+                xVelocity = 0;
+                yVelocity = 1;
+            }
+        }
+
+        //calling function 15 times every second
+        window.setInterval(runGame, 1000/15);
+
+        document.addEventListener('keydown', keyPushed);
+    </script>
+</body>
+</html>

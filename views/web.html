@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Classic Snake</title>
+    <link rel="stylesheet" href="../web.css">
+    <script>
+        //the following lines have been used until webpack and babel is added
+        //they are needed since the browser does not support them out-of-the-box
+        console.log('This script is working!');
+        require = () => ({});
+        module = {};
+        module.exports = () => ({});
+    </script>
+</head>
+<body>
+    <canvas id="canvas" width="700" height="500"></canvas>
+    <script src="../base.js"></script>
+    <script src="snake.js"></script>
+    <script src="../web.js"></script>
+</body>
+</html>
