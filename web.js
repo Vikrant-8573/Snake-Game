@@ -43,10 +43,10 @@ const step = t1 => t2 => {
 // Key events
 window.addEventListener('keydown', e => {
   switch (e.key) {
-    case 'w': case 'h': case 'ArrowUp':    state = enqueue(state, NORTH); break
-    case 'a': case 'j': case 'ArrowLeft':  state = enqueue(state, WEST);  break
-    case 's': case 'k': case 'ArrowDown':  state = enqueue(state, SOUTH); break
-    case 'd': case 'l': case 'ArrowRight': state = enqueue(state, EAST);  break
+    case 'w': case 'g': case 'ArrowUp':    state = enqueue(state, NORTH); break
+    case 'a': case 'h': case 'ArrowLeft':  state = enqueue(state, WEST);  break
+    case 's': case 'j': case 'ArrowDown':  state = enqueue(state, SOUTH); break
+    case 'd': case 'k': case 'ArrowRight': state = enqueue(state, EAST);  break
   }
 })
 
