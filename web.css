@@ -4,7 +4,7 @@ html, body {
     padding:         0;
     background:      #121212;
     text-align:      center;
-    color:           #fff;
+    color:           rgb(180, 235, 51);
     display:         flex;
     justify-content: center;
     align-items:     center;
